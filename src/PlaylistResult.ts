@@ -7,7 +7,7 @@ export default class PlaylistResult {
 	title: string;
 	videos: PlaylistVideo[];
 
-	static canConstruct({ playlistRenderer: pr }: any) {
+	static canConstruct({ playlistRenderer: pr }: any): boolean {
 		return pr?.playlistId;
 	}
 
@@ -15,7 +15,7 @@ export default class PlaylistResult {
 		this.id = pr.playlistId;
 		this.thumbnail = pr.thumbnails[0].thumbnails;
 		this.title = pr.title.simpleText;
-		this.videos = pr.videos.map(v => ({
+		this.videos = pr.videos.map((v: any) => ({
 			id: v.childVideoRenderer.videoId,
 			title: v.childVideoRenderer.title.simpleText,
 			lengthText: v.childVideoRenderer.lengthText.simpleText

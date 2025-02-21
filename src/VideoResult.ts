@@ -1,6 +1,6 @@
 import { Thumbnail } from './types.ts';
 
-const textRunsReducer = (prev, curr) => prev.text + curr.text;
+const textRunsReducer = (prev: any, curr: any) => prev.text + curr.text;
 
 export default class VideoResult {
 	type = 'video';
@@ -18,7 +18,7 @@ export default class VideoResult {
 		long: string;
 	};
 
-	static isLive({ badges, thumbnailOverlays }: any) {
+	static isLive({ badges, thumbnailOverlays }: any): boolean {
 		if (badges && badges[0]?.metadataBadgeRenderer?.style === 'BADGE_STYLE_TYPE_LIVE_NOW') return true;
 		if (thumbnailOverlays)
 			for (const item of thumbnailOverlays)
@@ -26,7 +26,7 @@ export default class VideoResult {
 		return false;
 	}
 
-	static canConstruct({ videoRenderer: vr, playlistVideoRenderer: pvr }: any) {
+	static canConstruct({ videoRenderer: vr, playlistVideoRenderer: pvr }: any): boolean {
 		return (vr || pvr)?.videoId;
 	}
 

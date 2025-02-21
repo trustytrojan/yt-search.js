@@ -8,11 +8,11 @@ export default class ChannelResult {
 	description: string | null;
 	subscribersText: string;
 
-	static canConstruct({ channelRenderer: cr }: any) {
+	static canConstruct({ channelRenderer: cr }: any): boolean {
 		return cr;
 	}
 
-	static getDescription({ descriptionSnippet }: any) {
+	static getDescription({ descriptionSnippet }: any): string | null {
 		if (!descriptionSnippet?.runs) return null;
 		let desc = '';
 		for (const run of descriptionSnippet.runs) if (run?.text) desc += run.text;
