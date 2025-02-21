@@ -7,11 +7,11 @@ export default class PlaylistResult {
 	title: string;
 	videos: PlaylistVideo[];
 
-	static canConstruct({ playlistRenderer: pr }) {
+	static canConstruct({ playlistRenderer: pr }: any) {
 		return pr?.playlistId;
 	}
 
-	constructor({ playlistRenderer: pr }) {
+	constructor({ playlistRenderer: pr }: any) {
 		this.id = pr.playlistId;
 		this.thumbnail = pr.thumbnails[0].thumbnails;
 		this.title = pr.title.simpleText;

@@ -6,20 +6,20 @@ export default class ChannelResult {
 	thumbnails: Thumbnail[];
 	title: string;
 	description: string | null;
-	subscribersText: any;
+	subscribersText: string;
 
-	static canConstruct({ channelRenderer: cr }) {
+	static canConstruct({ channelRenderer: cr }: any) {
 		return cr;
 	}
 
-	static getDescription({ descriptionSnippet }) {
+	static getDescription({ descriptionSnippet }: any) {
 		if (!descriptionSnippet?.runs) return null;
 		let desc = '';
 		for (const run of descriptionSnippet.runs) if (run?.text) desc += run.text;
 		return desc;
 	}
 
-	constructor({ channelRenderer: cr }) {
+	constructor({ channelRenderer: cr }: any) {
 		this.id = cr.channelId;
 		this.thumbnails = cr.thumbnail.thumbnails;
 		this.title = cr.title.simpleText;

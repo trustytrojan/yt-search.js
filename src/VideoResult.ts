@@ -18,7 +18,7 @@ export default class VideoResult {
 		long: string;
 	};
 
-	static isLive({ badges, thumbnailOverlays }) {
+	static isLive({ badges, thumbnailOverlays }: any) {
 		if (badges && badges[0]?.metadataBadgeRenderer?.style === 'BADGE_STYLE_TYPE_LIVE_NOW') return true;
 		if (thumbnailOverlays)
 			for (const item of thumbnailOverlays)
@@ -26,11 +26,11 @@ export default class VideoResult {
 		return false;
 	}
 
-	static canConstruct({ videoRenderer: vr, playlistVideoRenderer: pvr }) {
+	static canConstruct({ videoRenderer: vr, playlistVideoRenderer: pvr }: any) {
 		return (vr || pvr)?.videoId;
 	}
 
-	constructor({ videoRenderer: vr, playlistVideoRenderer: pvr }) {
+	constructor({ videoRenderer: vr, playlistVideoRenderer: pvr }: any) {
 		vr ??= pvr;
 		this.id = vr.videoId;
 		this.thumbnails = vr.thumbnail.thumbnails;
