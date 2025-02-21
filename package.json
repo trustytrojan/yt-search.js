@@ -1,0 +1,19 @@
+{
+	"type": "module",
+	"dependencies": {
+		"prettier": "^3.5.1"
+	},
+	"prettier": {
+		"arrowParens": "avoid",
+		"trailingComma": "none",
+		"useTabs": true,
+		"printWidth": 120,
+		"tabWidth": 4,
+		"semi": true,
+		"singleQuote": true,
+		"proseWrap": "preserve"
+	},
+	"scripts": {
+		"fmt": "prettier --log-level=warn --write './**/*.(t|j)s'"
+	}
+}

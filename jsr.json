@@ -1,0 +1,6 @@
+{
+	"name": "@trustytrojan/yt-search",
+	"version": "0.1.0",
+	"license": "",
+	"exports": "./src/index.ts"
+}
