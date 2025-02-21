@@ -1,3 +1,16 @@
+/**
+ * This module allows you to search YouTube without an API key.
+ *
+ * @example
+ * ```ts
+ * import yts from '@trustytrojan/yt-search';
+ * const { results } = await yts.search('rickroll');
+ * console.log(results);
+ * ```
+ *
+ * @module
+ */
+
 import VideoResult from './VideoResult.ts';
 import ChannelResult from './ChannelResult.ts';
 import PlaylistResult from './PlaylistResult.ts';
@@ -30,13 +43,14 @@ const searchResultTypeMapping = Object.freeze({
 	movie: 'BA'
 });
 
-export const search = async (
-	query: string,
-	type?: SearchResultType
-): Promise<{
-	results: SearchResult[];
-	nextPageCtx: NextPageContext;
-}> => {
+/**
+ * Search YouTube with a query, and optionally a search result type.
+ *
+ * @param query Search query
+ * @param type Search result type filter
+ * @returns Search results, and a {@link NextPageContext} object for use with {@link nextPage}
+ */
+export const search = async (query: string, type?: SearchResultType): Promise<[SearchResult[], NextPageContext]> => {
 	const page = await getInitData(
 		`${baseUrl}/results?search_query=${query}${type ? `&sp=EgIQ${searchResultTypeMapping[type]}%3D%3D` : ''}`
 	);
@@ -60,13 +74,16 @@ export const search = async (
 			}
 	}
 
-	return { results, nextPageCtx };
+	return [results, nextPageCtx];
 };
 
 /**
- * Only returns the next page of results for a certain search query.
- * If `type` was passed into `search`, you will continue get the same type of results.
- * You can pass the same `NextPageContext` object from `search` on this function several times.
+ * Returns the next set of search results for a certain search query.
+ * If `type` was passed into {@link search}, you will continue get the same type of results.
+ * The same {@link NextPageContext} object can be used indefinitely.
+ *
+ * @param ctx The {@link NextPageContext} object you got from {@link search}
+ * @returns The next page of search results for the same query you used in {@link search}
  */
 export const nextPage = async (ctx: NextPageContext): Promise<SearchResult[]> => {
 	const resp = await fetch(`${baseUrl}/youtubei/v1/search?key=${ctx.key}`, {

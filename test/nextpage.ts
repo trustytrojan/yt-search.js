@@ -1,5 +1,5 @@
 import { search, nextPage } from '../src/index.ts';
 
-const results = await search('hello world');
-const nextResults = await nextPage(results.nextPageCtx);
+const [_, nextPageCtx] = await search('hello world');
+const nextResults = await nextPage(nextPageCtx);
 console.log(nextResults);
